@@ -1,25 +1,33 @@
 #include "http.h"
 
-void handle_request(const httplib::Request& req, httplib::Response& res) {
-    auto request = std::make_shared<Request>(Request {
+#include "app.h"
+#include "settings.h"
+
+void handle_request(const httplib::Request &req, httplib::Response &res)
+{
+    auto request = std::make_shared<Request>(Request{
         .method = req.method,
         .path = req.path,
         .headers = {},
-        .body = req.body
-    });
-    for (const auto& header : req.headers) {
+        .body = req.body});
+    for (const auto &header : req.headers)
+    {
         request->headers[header.first] = header.second;
     }
 
-    // TODO: Process middleware (if any)
+    Application app = get_shared_application();
+    std::shared_ptr<Response> response = app(request);
 
-    // TODO: pass to actual application logic
-
-    res.status = 404;
-    res.body = "Not Found";
+    res.status = response->status;
+    for (const auto &header : response->headers)
+    {
+        res.set_header(header.first, header.second);
+    }
+    res.body = response->body;
 }
 
-void run_server() {
+void run_server()
+{
     httplib::Server svr;
 
     svr.Get(".*", handle_request);
