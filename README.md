@@ -36,7 +36,7 @@ git clone https://github.com/h3ssan/DjangoCPP.git
 cd DjangoCPP
 
 # Build the project
-make
+make -j$(nproc)
 
 # Run the server
 ./main
