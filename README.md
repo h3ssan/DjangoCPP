@@ -39,7 +39,7 @@ cd DjangoCPP
 make -j$(nproc)
 
 # Run the server
-./main
+./build/main
 ```
 
 The server will start at `http://127.0.0.1:8000`
