@@ -25,7 +25,8 @@ DjangoCPP is a lightweight, educational web framework written in modern C++23 th
 ### Prerequisites
 
 - C++23 compatible compiler (GCC 12+ or Clang 15+)
-- Make
+- cmake 3.10+
+- make
 - httplib.h (included in the project)
 
 ### Building
@@ -35,11 +36,17 @@ DjangoCPP is a lightweight, educational web framework written in modern C++23 th
 git clone https://github.com/h3ssan/DjangoCPP.git
 cd DjangoCPP
 
+# Create a build directory
+mkdir build && cd build
+
+# Configure the project
+cmake -DCMAKE_BUILD_TYPE=Release ..
+
 # Build the project
 make -j$(nproc)
 
 # Run the server
-./build/main
+./djangocpp
 ```
 
 The server will start at `http://127.0.0.1:8000`
