@@ -9,6 +9,7 @@ project(djangocpp
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++23 -Wall -Wextra -Werror -Wno-unused-parameter -pthread")
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
@@ -35,4 +36,3 @@ if(ENABLE_LTO)
     message(STATUS "LTO enabled")
     set_property(TARGET djangocpp PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
 endif()
-
