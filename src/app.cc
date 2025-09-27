@@ -1,8 +1,8 @@
-#include "app.h"
+#include "djangocpp/app.h"
 
-#include "routes.hpp"
-#include "middleware.hpp"
-#include "settings.h"
+#include "djangocpp/routes.hpp"
+#include "djangocpp/middleware.hpp"
+#include "djangocpp/settings.h"
 
 Application::Application(Handler handler) : handler{handler} {}
 

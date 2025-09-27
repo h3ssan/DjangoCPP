@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "http.h"
+#include "djangocpp/http.h"
 
 int main()
 {

@@ -1,7 +1,7 @@
-#include "http.h"
+#include "djangocpp/http.h"
 
-#include "app.h"
-#include "settings.h"
+#include "djangocpp/app.h"
+#include "djangocpp/settings.h"
 
 void handle_request(const httplib::Request &req, httplib::Response &res)
 {
