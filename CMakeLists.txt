@@ -23,7 +23,6 @@ elseif(CMAKE_BUILD_TYPE MATCHES Release)
 endif()
 
 set(SRC_FILES
-    ${PROJECT_SOURCE_DIR}/src/main.cc
     ${PROJECT_SOURCE_DIR}/src/app.cc
     ${PROJECT_SOURCE_DIR}/src/http.cc
     ${PROJECT_SOURCE_DIR}/src/router.cc
