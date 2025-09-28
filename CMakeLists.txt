@@ -29,10 +29,12 @@ set(SRC_FILES
     ${PROJECT_SOURCE_DIR}/src/router.cc
 )
 
-add_executable(djangocpp ${SRC_FILES})
+add_library(djangocpp ${SRC_FILES})
 
-# Enable LTO if requested
-if(ENABLE_LTO)
-    message(STATUS "LTO enabled")
-    set_property(TARGET djangocpp PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
-endif()
+set_target_properties(djangocpp PROPERTIES
+    OUTPUT_NAME "djangocpp"
+    POSITION_INDEPENDENT_CODE ON
+)
+
+install(TARGETS djangocpp DESTINATION lib)
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ DESTINATION include)
