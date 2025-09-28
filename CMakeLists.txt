@@ -19,7 +19,7 @@ option(ENABLE_LTO "Enable Link Time Optimization" ON)
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3" CACHE STRING "Debug flags" FORCE)
 elseif(CMAKE_BUILD_TYPE MATCHES Release)
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -flto -s" CACHE STRING "Release flags" FORCE)
+    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -s" CACHE STRING "Release flags" FORCE)
 endif()
 
 set(SRC_FILES
@@ -29,10 +29,12 @@ set(SRC_FILES
     ${PROJECT_SOURCE_DIR}/src/router.cc
 )
 
-add_executable(djangocpp ${SRC_FILES})
+add_library(djangocpp ${SRC_FILES})
 
-# Enable LTO if requested
-if(ENABLE_LTO)
-    message(STATUS "LTO enabled")
-    set_property(TARGET djangocpp PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
-endif()
+set_target_properties(djangocpp PROPERTIES
+    OUTPUT_NAME "djangocpp"
+    POSITION_INDEPENDENT_CODE ON
+)
+
+install(TARGETS djangocpp DESTINATION lib)
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ DESTINATION include)
