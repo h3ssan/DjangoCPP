@@ -31,6 +31,27 @@ DjangoCPP is a lightweight, educational web framework written in modern C++23 th
 
 ### Building
 
+#### Static Linking (default)
+
+```bash
+# Clone the repository
+git clone https://github.com/h3ssan/DjangoCPP.git
+cd DjangoCPP
+
+# Create a build directory
+mkdir build && cd build
+
+cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF ..
+
+# Build the project
+make -j$(nproc)
+
+# Install the library and headers
+sudo make install
+```
+
+#### Dynamic Linking
+
 ```bash
 # Clone the repository
 git clone https://github.com/h3ssan/DjangoCPP.git
@@ -40,16 +61,39 @@ cd DjangoCPP
 mkdir build && cd build
 
 # Configure the project
-cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON ..
 
 # Build the project
 make -j$(nproc)
 
-# Run the server
-./djangocpp
+# Install the library and headers
+sudo make install
 ```
 
-The server will start at `http://127.0.0.1:8000`
+### Example Application
+
+```cpp
+#include "djangocpp/http.h"
+
+int main() {
+    run_server();
+
+    return EXIT_SUCCESS;
+}
+```
+
+```cmake
+cmake_minimum_required(VERSION 3.10)
+
+project(myapp)
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -s")
+
+add_executable(myapp main.cc)
+
+target_link_libraries(myapp PRIVATE djangocpp)
+```
 
 ### Testing
 
